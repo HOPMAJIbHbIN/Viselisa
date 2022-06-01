@@ -11,13 +11,12 @@
         <ImageBrush ImageSource="Image\Papper.jpg"/>
     </Window.Background>
     <Grid x:Name="MainGrid">
-        <!--Меню/Поражнеие/победа-->
+        <!--Меню-->
         <Grid x:Name="MenuGrid">
             <Grid.Background>
                 <ImageBrush ImageSource="Image\Komnata.png"/>
             </Grid.Background>
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
-                
                 <!--Сложность-->
                 <GroupBox x:Name="DifficulteBox" Header="Выбор сложности" FontFamily="Times New Roman" FontSize="20" Margin="0 0 0 150">
                     <StackPanel Orientation="Horizontal">
@@ -27,10 +26,27 @@
                         <RadioButton x:Name="UnrealDifficulte"  Content="Без права на ошибку"/>
                     </StackPanel>
                 </GroupBox>
-
                 <Button x:Name="PlayBut" Content="Играть" Margin="0 0 0 10" FontFamily="Times New Roman" FontSize="16" Width="120" Height="25" Click="PlayBut_Click"/>
-                <Button x:Name="WordsBut" Content="Слова" Margin="0 0 0 80" FontFamily="Times New Roman" FontSize="16" Width="120" Height="25"/>
+                <Button x:Name="WordsBut" Content="Слова" Margin="0 0 0 80" FontFamily="Times New Roman" FontSize="16" Width="120" Height="25" Click="WordsBut_Click"/>
                 <Button x:Name="ExitBut" Content="Выход" Margin="0 0 0 20" FontFamily="Times New Roman" FontSize="16" Width="120" Height="25" Click="ExitBut_Click"/>
+            </StackPanel>
+        </Grid>
+        <!--Добавление слов-->
+        <Grid x:Name="WordsGrid" Visibility="Hidden">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBox/>
+                <Button></Button>
+            </StackPanel>
+        </Grid>
+
+        <!--Окно Победа\Поражение-->
+        <Grid x:Name="PobedaStack" Visibility="Hidden" Panel.ZIndex="1">
+            <Panel.Background>
+                <ImageBrush ImageSource="Image\Pobeda.jpg"/>
+            </Panel.Background>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Button x:Name="WinButton" Content="Выход"  Width="85" Height="30" Margin="0,0,20,20" Click="ExitBut_Click"/>
+                <Button x:Name="Repid2Button" Content="Главное меню" Width="100" Height="30"  Margin="0,0,20,20" Click="RepidButton_Click"/>
             </StackPanel>
         </Grid>
         <Grid x:Name="PorajStack" Visibility="Hidden" Panel.ZIndex="1">
@@ -38,17 +54,8 @@
                 <ImageBrush ImageSource="Image\Porajenie.jpg"/>
             </Panel.Background>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <Button x:Name="LoseButton" Content="Завершить" Width="85" Height="30"  Margin="0,0,20,20" Click="ExitBut_Click"/>
-                <Button x:Name="RepidButton" Content="Повторить" Width="85" Height="30"  Margin="0,0,20,20" Click="RepidButton_Click"/>
-            </StackPanel>
-        </Grid>
-        <Grid x:Name="PobedaStack" Visibility="Hidden" Panel.ZIndex="1">
-            <Panel.Background>
-                <ImageBrush ImageSource="Image\Pobeda.jpg"/>
-            </Panel.Background>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <Button x:Name="WinButton" Content="Завершить"  Width="85" Height="30" Margin="0,0,20,20" Click="ExitBut_Click"/>
-                <Button x:Name="Repid2Button" Content="Повторить" Width="85" Height="30"  Margin="0,0,20,20" Click="RepidButton_Click"/>
+                <Button x:Name="LoseButton" Content="Выход" Width="85" Height="30"  Margin="0,0,20,20" Click="ExitBut_Click"/>
+                <Button x:Name="RepidButton" Content="Главное меню" Width="100" Height="30"  Margin="0,0,20,20" Click="RepidButton_Click"/>
             </StackPanel>
         </Grid>
 

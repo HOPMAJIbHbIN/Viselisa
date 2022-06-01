@@ -24,6 +24,8 @@ namespace Viselisa
         private readonly DrawVis _drawVis;
         private readonly WordsCheck _wordsCheck;
         private readonly Vocaburary _vocaburary;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,9 +49,9 @@ namespace Viselisa
                 _drawVis.DrawViselica(count);
                 ErBlock.Text = "Количество возможных ошибок: " + Convert.ToString(_wordsCheck.MistakeCheck(count, check));
             }
-            if(this.MiddleDifficulte.IsChecked == true)
+            if (this.MiddleDifficulte.IsChecked == true)
             {
-                for (int i =0; i < 2; i++)
+                for (int i = 0; i < 2; i++)
                 {
                     count++;
                     _drawVis.DrawViselica(count);
@@ -64,7 +66,7 @@ namespace Viselisa
                     _drawVis.DrawViselica(count);
                     ErBlock.Text = "Количество возможных ошибок: " + Convert.ToString(_wordsCheck.MistakeCheck(count, check));
                 }
-            }           
+            }
             if (this.UnrealDifficulte.IsChecked == true)
             {
                 for (int i = 0; i < 15; i++)
@@ -102,37 +104,32 @@ namespace Viselisa
         {
             Repid();
         }
-
-
+        private void WordsBut_Click(object sender, RoutedEventArgs e)
+        {
+            this.WordsGrid.Visibility = Visibility.Visible;
+        }
         #endregion
-        string text = "депрессия лодка мода роза работа вера торговец шампунь зонт затмение верность бездна безудержность безумность безупречность " +
-                "бездушие безмолвие грусть ненависть недуг доблесть отвага водружение вода водяника " +
-                "водянистость водянка воевода воеводство военачальник военизация военком честь доклад абажур " +
-                "аббатство абзац абиогенез абитуриент абонемент абонент абордаж абрикос абсент абсолютизм абсорбент " +
-                "абстракция абсурд абсцисса авангард авангардизм аванпост аванс авантюра авантюризм авария август авиабаза " +
-                "авиабилет страх смерть отчаянье оратор гладиатор реформатор дегустатор ворона медуза парашют весна лето " +
-                "осень зима загон клуб пентагон телефония золото ";
+        string words;
         public void Repid()
         {
             MainWindow newGame = new MainWindow();
             Application.Current.MainWindow = newGame;
             newGame.Show();
-            newGame.MenuGrid.Visibility = Visibility.Hidden;
-            newGame.GameGrid.Visibility = Visibility.Visible;
+            //newGame.MenuGrid.Visibility = Visibility.Hidden;
+            //newGame.GameGrid.Visibility = Visibility.Visible;
 
             this.Close();
 
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            words = _vocaburary.ReadWords(words);
             List<string> WordsList = new List<string>();
-            string[] wordSplit = text.Split(" ");
+            string[] wordSplit = words.Split(" ");
             word = wordSplit[new Random().Next(0, wordSplit.Length)];
             arrayLetter = _wordsCheck.LetterList(word);
             _wordsCheck.InsertWord(arrayLetter);
             _drawVis.DrawLetters(arrayLetter.Count);
         }
-
-
     }
 }
