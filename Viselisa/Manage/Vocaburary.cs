@@ -12,16 +12,21 @@ namespace Viselisa.Manage
 {
     class Vocaburary
     {
-        String line;
-       // string words;
+        private TextBox _text;
+        public Vocaburary(TextBox AddWord)
+            {
+            _text = AddWord;
+            }
 
-        public void WriteWord(TextBox text)
+        String line;
+
+        public void WriteWord()
         {
             try
             {
 
-                StreamWriter sw = new StreamWriter("Words.txt", true, Encoding.ASCII);
-                sw.Write(text + " ");
+                StreamWriter sw = new StreamWriter("Words.txt",true,Encoding.UTF8);
+                sw.Write(_text.Text + " ");
                 sw.Close();
             }
             catch (Exception e)

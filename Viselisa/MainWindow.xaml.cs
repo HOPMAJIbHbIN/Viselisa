@@ -32,10 +32,10 @@ namespace Viselisa
             _drawVis = new DrawVis(DrawGrid, CanvEllips, ProcherkGrid, ProcherkCanvas);
             _wordsCheck = new WordsCheck(PorajStack, PobedaStack, Letter1, Letter2, Letter3, Letter4,
                 Letter5, Letter6, Letter7, Letter8, Letter9, Letter10, Letter11, Letter12, Letter13, Letter14);
-            _vocaburary = new Vocaburary();
+            _vocaburary = new Vocaburary(AddWord);
         }
         //мин.Букв = 4; макс.Букв = 14 мб 15
-        string word = "общество";
+        string word, words;
         int count = 0;
         bool check;
         List<char> arrayLetter = new List<char>();
@@ -79,6 +79,7 @@ namespace Viselisa
             }
 
         }
+
         //Конопки
         #region
         private void One_button_Click(object sender, RoutedEventArgs e)
@@ -106,26 +107,41 @@ namespace Viselisa
         }
         private void WordsBut_Click(object sender, RoutedEventArgs e)
         {
+            this.MenuGrid.Visibility = Visibility.Hidden;
             this.WordsGrid.Visibility = Visibility.Visible;
         }
+        private void AddWordButton_Click(object sender, RoutedEventArgs e)
+        {
+            _vocaburary.WriteWord();
+            AddWord.Text = "";
+            Repid();
+            MessageBox.Show("Слово успешно добавлено");
+
+        }
+        private void AddFinishButton_Click(object sender, RoutedEventArgs e)
+        {
+            Repid();
+        }
         #endregion
-        string words;
+
         public void Repid()
         {
             MainWindow newGame = new MainWindow();
             Application.Current.MainWindow = newGame;
             newGame.Show();
-            //newGame.MenuGrid.Visibility = Visibility.Hidden;
-            //newGame.GameGrid.Visibility = Visibility.Visible;
-
             this.Close();
 
         }
+
+
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             words = _vocaburary.ReadWords(words);
-            List<string> WordsList = new List<string>();
             string[] wordSplit = words.Split(" ");
+
+            for (int i = 0; i < wordSplit.Length; i++)
+                WordsList.Items.Add(wordSplit[i]);
             word = wordSplit[new Random().Next(0, wordSplit.Length)];
             arrayLetter = _wordsCheck.LetterList(word);
             _wordsCheck.InsertWord(arrayLetter);
